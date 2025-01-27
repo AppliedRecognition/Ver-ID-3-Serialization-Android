@@ -16,8 +16,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven("https://s01.oss.sonatype.org/content/groups/staging/")
-        mavenLocal()
+        maven {
+            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-Android-Releases")
+            credentials {
+                username = settings.extra["gpr.user"] as String?
+                password = settings.extra["gpr.token"] as String?
+            }
+        }
     }
 }
 
