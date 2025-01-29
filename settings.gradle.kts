@@ -17,7 +17,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-Android-Releases")
+            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-3D-Android-Libraries")
             credentials {
                 username = settings.extra["gpr.user"] as String?
                 password = settings.extra["gpr.token"] as String?
