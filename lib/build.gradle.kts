@@ -63,7 +63,7 @@ android {
                 srcDir("../proto")  // Point to the directory where your .proto files are located
                 include("../proto")  // Include all .proto files
             }
-            java.srcDirs("src/main/kotlin", "${layout.buildDirectory}/generated/source/proto/main/kotlin")
+            java.srcDirs("src/main/kotlin", layout.buildDirectory.file("generated/source/proto/main/kotlin"))
             jniLibs.srcDirs("src/main/cpp")
         }
     }
@@ -105,9 +105,9 @@ protobuf {
 
 publishing {
     publications {
-        create<MavenPublication>("lib") {
-            groupId = "com.appliedrec.verid3"
-            artifactId = "common-serialization"
+        create<MavenPublication>("release") {
+            groupId = "com.appliedrec"
+            artifactId = "verid3-serialization"
             version = "1.0.0"
             afterEvaluate {
                 from(components["release"])
@@ -149,7 +149,7 @@ publishing {
         }
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-3D-Android-Libraries")
+            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-Releases-Android")
             credentials {
                 username = project.findProperty("gpr.user") as String?
                 password = project.findProperty("gpr.token") as String?
@@ -160,5 +160,5 @@ publishing {
 
 signing {
     useGpgCmd()
-    sign(publishing.publications["lib"])
+    sign(publishing.publications["release"])
 }

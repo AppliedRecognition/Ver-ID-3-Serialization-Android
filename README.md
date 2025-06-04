@@ -1,6 +1,6 @@
 # Ver-ID serialization
 
-This library introduces extensions that serialize Ver-ID's [IImage](https://github.com/AppliedRecognition/Ver-ID-Common-Types-Android/blob/main/lib/src/main/java/com/appliedrec/verid/common/IImage.kt) and [Face](https://github.com/AppliedRecognition/Ver-ID-Common-Types-Android/blob/main/lib/src/main/java/com/appliedrec/verid/common/Face.kt) types using protocol buffers.
+This library introduces extensions that serialize Ver-ID's [IImage](https://github.com/AppliedRecognition/Ver-ID-Common-Types-Android/blob/main/lib/src/main/java/com/appliedrec/verid3/common/IImage.kt) and [Face](https://github.com/AppliedRecognition/Ver-ID-Common-Types-Android/blob/main/lib/src/main/java/com/appliedrec/verid3/common/Face.kt) types using protocol buffers.
 
 ## Usage
 
