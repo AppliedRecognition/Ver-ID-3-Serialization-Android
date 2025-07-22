@@ -1,15 +1,15 @@
 [versions]
-agp = "8.7.3"
-kotlin = "2.0.0"
+agp = "8.11.1"
+kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-protobuf = "0.9.4"
-protobufJavalite = "4.26.1"
-protoc = "3.21.12"
-verid-common = "1.0.0"
-jxlCoderVersion = "2.4.0.5"
+protobuf = "0.9.5"
+protobufJavalite = "4.31.1"
+protoc = "4.31.1"
+verid-common = "2.1.0"
+jxlCoderVersion = "2.4.0.7"
 androidNdk = "27.1.12297006"
 
 [libraries]

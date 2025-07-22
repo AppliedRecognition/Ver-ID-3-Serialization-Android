@@ -1,4 +1,5 @@
 import com.google.protobuf.gradle.proto
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
@@ -9,9 +10,11 @@ plugins {
     signing
 }
 
+version = "1.0.1"
+
 android {
     namespace = "com.appliedrec.verid3.common.serialization"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 26
@@ -19,11 +22,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+            abiFilters += listOf("arm64-v8a", "x86_64")
         }
         externalNativeBuild {
             cmake {
-                abiFilters("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
+                abiFilters("arm64-v8a", "x86_64")
                 // Get the NDK root path
                 val properties = Properties()
                 properties.load(project.rootProject.file("local.properties").inputStream())
@@ -48,8 +51,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
     }
     externalNativeBuild {
         cmake {
@@ -95,20 +100,11 @@ protobuf {
     }
 }
 
-//tasks.register<Exec>("buildProtobufTypes") {
-//    commandLine("sh", "../build.sh")
-//}
-//
-//tasks.named("build") {
-//    dependsOn("buildProtobufTypes")
-//}
-
 publishing {
     publications {
         create<MavenPublication>("release") {
             groupId = "com.appliedrec"
             artifactId = "verid3-serialization"
-            version = "1.0.0"
             afterEvaluate {
                 from(components["release"])
             }
