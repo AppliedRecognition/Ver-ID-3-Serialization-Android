@@ -20,4 +20,6 @@ message Face {
     PointF right_eye = 11;
     optional PointF nose_tip = 12;
     optional PointF mouth_centre = 13;
+    optional PointF mouth_left_corner = 14;
+    optional PointF mouth_right_corner = 15;
 }

@@ -26,6 +26,12 @@ fun Face.serialize(): ByteArray {
     this.mouthCentre?.let {
         builder.setMouthCentre(Pointf.PointF.newBuilder().setX(it.x).setY(it.y))
     }
+    this.mouthLeftCorner?.let {
+        builder.setMouthLeftCorner(Pointf.PointF.newBuilder().setX(it.x).setY(it.y))
+    }
+    this.mouthRightCorner?.let {
+        builder.setMouthRightCorner(Pointf.PointF.newBuilder().setX(it.x).setY(it.y))
+    }
     return builder.build().toByteArray()
 }
 
@@ -39,6 +45,8 @@ fun Face.Companion.deserialize(bytes: ByteArray): Face {
         PointF(face.leftEye.x, face.leftEye.y),
         PointF(face.rightEye.x, face.rightEye.y),
         if (face.hasNoseTip()) PointF(face.noseTip.x, face.noseTip.y) else null,
-        if (face.hasMouthCentre()) PointF(face.mouthCentre.x, face.mouthCentre.y) else null
+        if (face.hasMouthCentre()) PointF(face.mouthCentre.x, face.mouthCentre.y) else null,
+        if (face.hasMouthLeftCorner()) PointF(face.mouthLeftCorner.x, face.mouthLeftCorner.y) else null,
+        if (face.hasMouthRightCorner()) PointF(face.mouthRightCorner.x, face.mouthRightCorner.y) else null
     )
 }
