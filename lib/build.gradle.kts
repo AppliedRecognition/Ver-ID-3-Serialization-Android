@@ -10,7 +10,7 @@ plugins {
     signing
 }
 
-version = "1.0.1"
+version = "1.0.2"
 
 android {
     namespace = "com.appliedrec.verid3.common.serialization"
@@ -36,6 +36,10 @@ android {
                 arguments("-DNDK_ROOT_PATH=${ndkRootPath}")
             }
         }
+    }
+
+    publishing {
+        singleVariant("release") {}
     }
 
     buildTypes {

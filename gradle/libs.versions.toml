@@ -8,7 +8,7 @@ espressoCore = "3.6.1"
 protobuf = "0.9.5"
 protobufJavalite = "4.31.1"
 protoc = "4.31.1"
-verid-common = "2.1.0"
+verid-common = "3.0.0"
 jxlCoderVersion = "2.4.0.7"
 androidNdk = "27.1.12297006"
 
