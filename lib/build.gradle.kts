@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.protobuf)
-    `maven-publish`
+    alias(libs.plugins.vanniktechPublish)
     signing
 }
 
@@ -36,10 +36,6 @@ android {
                 arguments("-DNDK_ROOT_PATH=${ndkRootPath}")
             }
         }
-    }
-
-    publishing {
-        singleVariant("release") {}
     }
 
     buildTypes {
@@ -82,7 +78,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.protobuf.javalite)
-    implementation(libs.verid.common)
+    api(libs.verid.common)
     implementation(libs.jxl.coder)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -104,61 +100,35 @@ protobuf {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            groupId = "com.appliedrec"
-            artifactId = "verid3-serialization"
-            afterEvaluate {
-                from(components["release"])
+mavenPublishing {
+    coordinates("com.appliedrec", "verid-serialization")
+    pom {
+        name.set("Ver-ID Serialization")
+        description.set("Serialization of Ver-ID SDK types using protocol buffers")
+        url.set("https://github.com/AppliedRecognition/Ver-ID-Serialization-Android")
+        licenses {
+            license {
+                name.set("Commercial")
+                url.set("https://raw.githubusercontent.com/AppliedRecognition/Ver-ID-Serialization-Android/main/LICENCE.txt")
             }
-            pom {
-                name.set("Ver-ID Serialization")
-                description.set("Serialization of Ver-ID SDK types using protocol buffers")
-                url.set("https://github.com/AppliedRecognition/Ver-ID-Serialization-Android")
-                licenses {
-                    license {
-                        name.set("Commercial")
-                        url.set("https://raw.githubusercontent.com/AppliedRecognition/Ver-ID-Serialization-Android/main/LICENCE.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("appliedrec")
-                        name.set("Applied Recognition")
-                        email.set("support@appliedrecognition.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:git://github.com/AppliedRecognition/Ver-ID-Serialization-Android.git")
-                    developerConnection.set("scm:git:ssh://github.com/AppliedRecognition/Ver-ID-Serialization-Android.git")
-                    url.set("https://github.com/AppliedRecognition/Ver-ID-Serialization-Android")
-                }
+        }
+        developers {
+            developer {
+                id.set("appliedrec")
+                name.set("Applied Recognition")
+                email.set("support@appliedrecognition.com")
             }
+        }
+        scm {
+            connection.set("scm:git:git://github.com/AppliedRecognition/Ver-ID-Serialization-Android.git")
+            developerConnection.set("scm:git:ssh://github.com/AppliedRecognition/Ver-ID-Serialization-Android.git")
+            url.set("https://github.com/AppliedRecognition/Ver-ID-Serialization-Android")
         }
     }
-
-    repositories {
-        maven {
-            name = "MavenCentral"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = project.findProperty("mavenCentralUsername") as String?
-                password = project.findProperty("mavenCentralPassword") as String?
-            }
-        }
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-Releases-Android")
-            credentials {
-                username = project.findProperty("gpr.user") as String?
-                password = project.findProperty("gpr.token") as String?
-            }
-        }
-    }
+    publishToMavenCentral(automaticRelease = true)
 }
 
 signing {
     useGpgCmd()
-    sign(publishing.publications["release"])
+    sign(publishing.publications)
 }
